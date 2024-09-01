@@ -20,5 +20,5 @@ defmodule ChangenoteWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :changenote
+  use Gettext.Backend, otp_app: :changenote
 end

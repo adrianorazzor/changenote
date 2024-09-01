@@ -17,7 +17,7 @@ defmodule ChangenoteWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import ChangenoteWeb.Gettext
+  use Gettext, backend: ChangenoteWeb.Gettext
 
   @doc """
   Renders a modal.

@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :changenote, Changenote.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "root",
   hostname: "localhost",
   database: "changenote_dev",
   stacktrace: true,
