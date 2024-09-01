@@ -1,48 +1,29 @@
-<.header>
-  Listing Changelogs
-  <:actions>
-    <.link patch={~p"/changelogs/new"}>
-      <.button>New Changelog</.button>
-    </.link>
-  </:actions>
-</.header>
+<h1 class="text-2xl font-bold mb-6">Latest Changelogs</h1>
+<.link navigate={~p"/changelogs/new"}
+  class="mb-8 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+  Add New Changelog
+</.link>
 
-<.table
-  id="changelogs"
-  rows={@streams.changelogs}
-  row_click={fn {_id, changelog} -> JS.navigate(~p"/changelogs/#{changelog}") end}
->
-  <:col :let={{_id, changelog}} label="Title"><%= changelog.title %></:col>
-  <:col :let={{_id, changelog}} label="Content"><%= changelog.content %></:col>
-  <:col :let={{_id, changelog}} label="System version"><%= changelog.system_version %></:col>
-  <:col :let={{_id, changelog}} label="Release date"><%= changelog.release_date %></:col>
-  <:col :let={{_id, changelog}} label="Bug fixes"><%= changelog.bug_fixes %></:col>
-  <:col :let={{_id, changelog}} label="New features"><%= changelog.new_features %></:col>
-  <:col :let={{_id, changelog}} label="Improvements"><%= changelog.improvements %></:col>
-  <:col :let={{_id, changelog}} label="Known issues"><%= changelog.known_issues %></:col>
-  <:action :let={{_id, changelog}}>
-    <div class="sr-only">
-      <.link navigate={~p"/changelogs/#{changelog}"}>Show</.link>
+<div class="space-y-4">
+  <%= for changelog <- @changelogs do %>
+    <div class="bg-white shadow-md rounded-lg p-4 flex items-center">
+      <div class="flex-grow">
+        <h2 class="text-xl font-semibold">
+          <%= changelog.title %>
+        </h2>
+        <p class="text-gray-600 text-sm">
+          Version: <%= changelog.system_version %> |
+            Released: <%= Calendar.strftime(changelog.release_date, "%B %d, %Y" ) %>
+        </p>
+        <p class="text-gray-800 mt-2">
+          <%= String.slice(changelog.content, 0, 100) %>...
+        </p>
+      </div>
+      <div class="ml-4">
+        <.link navigate={~p"/changelogs/#{changelog.id}"} class="text-blue-500 hover:text-blue-700">
+          Read more
+        </.link>
+      </div>
     </div>
-    <.link patch={~p"/changelogs/#{changelog}/edit"}>Edit</.link>
-  </:action>
-  <:action :let={{id, changelog}}>
-    <.link
-      phx-click={JS.push("delete", value: %{id: changelog.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
-    >
-      Delete
-    </.link>
-  </:action>
-</.table>
-
-<.modal :if={@live_action in [:new, :edit]} id="changelog-modal" show on_cancel={JS.patch(~p"/changelogs")}>
-  <.live_component
-    module={ChangenoteWeb.ChangelogLive.FormComponent}
-    id={@changelog.id || :new}
-    title={@page_title}
-    action={@live_action}
-    changelog={@changelog}
-    patch={~p"/changelogs"}
-  />
-</.modal>
+    <% end %>
+</div>

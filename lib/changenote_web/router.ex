@@ -68,6 +68,10 @@ defmodule ChangenoteWeb.Router do
       on_mount: [{ChangenoteWeb.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+
+      live "/changelogs", ChangelogLive.Index
+      live "/changelogs/new", ChangelogLive.New, :new
+      live "/changelogs/:id", ChangelogLive.Show, :show
     end
   end
 
