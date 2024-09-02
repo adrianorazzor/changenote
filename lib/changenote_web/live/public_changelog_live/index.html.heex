@@ -1,0 +1,46 @@
+<.header>
+    Public Changelogs
+    <:subtitle>View our latest releases and updates</:subtitle>
+</.header>
+
+<div class="space-y-4">
+    <%= for changelog <- @changelogs do %>
+        <div class="bg-white shadow-md rounded-lg p-4">
+            <h2 class="text-xl font-semibold">
+                <%= changelog.title %>
+            </h2>
+            <p class="text-gray-600 text-sm">
+                Version: <%= changelog.system_version %> |
+                    Released: <%= Calendar.strftime(changelog.release_date, "%B %d, %Y" ) %>
+            </p>
+            <p class="text-gray-800 mt-2">
+                <%= changelog.description %>
+            </p>
+            <div class="mt-4">
+                <h3 class="font-semibold">New Features:</h3>
+                <p>
+                    <%= changelog.new_features %>
+                </p>
+            </div>
+            <div class="mt-2">
+                <h3 class="font-semibold">Improvements:</h3>
+                <p>
+                    <%= changelog.improvements %>
+                </p>
+            </div>
+            <div class="mt-2">
+                <h3 class="font-semibold">Bug Fixes:</h3>
+                <p>
+                    <%= changelog.bug_fixes %>
+                </p>
+            </div>
+            <!-- Add the View Details button -->
+            <div class="mt-4">
+                <button phx-click="view_details" phx-value-id={changelog.id}
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    View Details
+                </button>
+            </div>
+        </div>
+        <% end %>
+</div>

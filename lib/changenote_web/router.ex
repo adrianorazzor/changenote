@@ -21,6 +21,9 @@ defmodule ChangenoteWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    live "/public/changelogs", PublicChangelogLive.Index, :index
+    live "/public/changelogs/:id", PublicChangelogLive.Show, :show
   end
 
   # Other scopes may use custom stacks.

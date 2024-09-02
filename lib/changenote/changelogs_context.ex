@@ -102,4 +102,11 @@ defmodule Changenote.Changelogs do
   def change_changelog(%Changelog{} = changelog, attrs \\ %{}) do
     Changelog.changeset(changelog, attrs)
   end
+
+  def list_public_changelogs do
+    Changelog
+    |> order_by([c], [desc: c.release_date, desc: c.inserted_at])
+    |> limit(10)  # Limit to the 10 most recent changelogs
+    |> Repo.all()
+  end
 end
