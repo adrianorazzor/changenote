@@ -3,19 +3,7 @@
     <:subtitle>Create a new changelog entry</:subtitle>
 </.header>
 
-<.simple_form for={@form} id="changelog-form" phx-submit="save">
-    <.input field={@form[:title]} type="text" label="Title" />
-    <.input field={@form[:system_version]} type="text" label="System Version" />
-    <.input field={@form[:release_date]} type="date" label="Release Date" />
-    <.input field={@form[:content]} type="textarea" label="Content" />
-    <.input field={@form[:bug_fixes]} type="textarea" label="Bug Fixes" />
-    <.input field={@form[:new_features]} type="textarea" label="New Features" />
-    <.input field={@form[:improvements]} type="textarea" label="Improvements" />
-    <.input field={@form[:known_issues]} type="textarea" label="Known Issues" />
-
-    <:actions>
-        <.button phx-disable-with="Saving...">Save Changelog</.button>
-    </:actions>
-</.simple_form>
+<.live_component module={ChangenoteWeb.ChangelogLive.FormComponent} id="new-changelog" action={:new}
+    return_to={~p"/changelogs"} />
 
 <.back navigate={~p"/changelogs"}>Back to changelogs</.back>

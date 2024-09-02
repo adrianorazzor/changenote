@@ -5,7 +5,7 @@ defmodule Changenote.Changelogs.Changelog do
   schema "changelogs" do
     field :system_version, :string
     field :title, :string
-    field :content, :string
+    field :description, :string  # Changed from :content to :description
     field :release_date, :date
     field :bug_fixes, :string
     field :new_features, :string
@@ -19,7 +19,7 @@ defmodule Changenote.Changelogs.Changelog do
   @doc false
   def changeset(changelog, attrs) do
     changelog
-    |> cast(attrs, [:title, :content, :system_version, :release_date, :bug_fixes, :new_features, :improvements, :known_issues])
-    |> validate_required([:title, :content, :system_version, :release_date, :bug_fixes, :new_features, :improvements, :known_issues])
+    |> cast(attrs, [:title, :description, :system_version, :release_date, :bug_fixes, :new_features, :improvements, :known_issues])
+    |> validate_required([:title, :description, :system_version, :release_date, :bug_fixes, :new_features, :improvements, :known_issues])
   end
 end
