@@ -49,9 +49,10 @@ defmodule Changenote.Changelogs do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_changelog(attrs \\ %{}) do
+  def create_changelog(attrs \\ %{}, user) do
     %Changelog{}
     |> Changelog.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:user, user)
     |> Repo.insert()
   end
 

@@ -30,25 +30,24 @@ defmodule ChangenoteWeb.ChangelogLive.FormComponent do
   end
 
   @impl true
-  def update(%{action: :new} = assigns, socket) do
+  def update(%{action: :new, current_user: current_user} = assigns, socket) do
     changeset = Changelogs.change_changelog(%Changelog{})
     {:ok,
      socket
      |> assign(assigns)
+     |> assign(:current_user, current_user)
      |> assign(:form, to_form(changeset))}
   end
 
   @impl true
   def handle_event("save", %{"changelog" => changelog_params}, socket) do
     changelog_params = Map.update(changelog_params, "release_date", nil, &parse_date/1)
-
-    case Changelogs.create_changelog(changelog_params) do
+    case Changelogs.create_changelog(changelog_params, socket.assigns.current_user) do
       {:ok, _changelog} ->
         send(self(), {__MODULE__, :changelog_created})
         {:noreply,
          socket
          |> put_flash(:info, "Changelog created successfully")}
-
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
     end

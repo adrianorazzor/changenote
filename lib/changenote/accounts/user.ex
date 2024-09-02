@@ -1,13 +1,14 @@
 defmodule Changenote.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-
+  alias Changenote.Changelogs.Changelog
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :current_password, :string, virtual: true, redact: true
     field :confirmed_at, :utc_datetime
+    has_many :changelogs, Changelog
 
     timestamps(type: :utc_datetime)
   end

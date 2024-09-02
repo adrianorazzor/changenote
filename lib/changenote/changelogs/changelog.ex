@@ -1,6 +1,7 @@
-defmodule Changenote.Changelogs.Changelog do
+  defmodule Changenote.Changelogs.Changelog do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Changenote.Accounts.User
 
   schema "changelogs" do
     field :system_version, :string
@@ -11,7 +12,7 @@ defmodule Changenote.Changelogs.Changelog do
     field :new_features, :string
     field :improvements, :string
     field :known_issues, :string
-    field :user_id, :id
+    belongs_to :user, User
 
     timestamps(type: :utc_datetime)
   end

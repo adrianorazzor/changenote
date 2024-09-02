@@ -4,6 +4,6 @@
 </.header>
 
 <.live_component module={ChangenoteWeb.ChangelogLive.FormComponent} id="new-changelog" action={:new}
-    return_to={~p"/changelogs"} />
+    current_user={@current_user} return_to={~p"/changelogs"} />
 
 <.back navigate={~p"/changelogs"}>Back to changelogs</.back>
