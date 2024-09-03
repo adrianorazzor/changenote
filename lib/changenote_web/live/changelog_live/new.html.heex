@@ -1,9 +1,17 @@
-<.header>
-    New Changelog
-    <:subtitle>Create a new changelog entry</:subtitle>
-</.header>
+<div class="max-w-2xl mx-auto py-8">
+    <.header class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">New Changelog</h1>
+        <:subtitle class="mt-2 text-lg text-gray-600">What's new in this release?</:subtitle>
+    </.header>
 
-<.live_component module={ChangenoteWeb.ChangelogLive.FormComponent} id="new-changelog" action={:new}
-    current_user={@current_user} return_to={~p"/changelogs"} />
+    <div class="mb-4 text-left">
+        <.back navigate={~p"/changelogs"}>
+            Back to changelogs
+        </.back>
+    </div>
 
-<.back navigate={~p"/changelogs"}>Back to changelogs</.back>
+    <div class="bg-white shadow rounded-lg p-6">
+        <.live_component module={ChangenoteWeb.ChangelogLive.FormComponent} id="new-changelog" action={:new}
+            current_user={@current_user} return_to={~p"/changelogs"} />
+    </div>
+</div>

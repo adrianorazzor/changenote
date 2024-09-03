@@ -6,6 +6,6 @@ defmodule ChangenoteWeb.ChangelogLive.Index do
   def mount(_params, _session, socket) do
     changelogs = Changelogs.list_changelogs()
     socket = assign(socket, :changelogs, changelogs)
-    {:ok, assign(socket, changelogs: changelogs)}
+    {:ok, socket}
   end
 end

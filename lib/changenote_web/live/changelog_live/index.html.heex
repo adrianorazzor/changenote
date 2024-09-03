@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center mb-4">
+<div class="flex justify-between items-center mb-6">
   <h1 class="text-2xl font-bold">Latest Changelogs</h1>
   <.link navigate={~p"/changelogs/new"} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
     New Changelog
@@ -7,24 +7,24 @@
 
 <div class="space-y-4">
   <%= for changelog <- @changelogs do %>
-    <div class="bg-white shadow-md rounded-lg p-4 flex items-center">
-      <div class="flex-grow">
-        <h2 class="text-xl font-semibold">
-          <%= changelog.title %>
-        </h2>
-        <p class="text-gray-600 text-sm">
-          Version: <%= changelog.system_version %> |
-            Released: <%= Calendar.strftime(changelog.release_date, "%B %d, %Y" ) %>
-        </p>
-        <p class="text-gray-800 mt-2">
-          <%= String.slice(changelog.description, 0, 100) %>...
-        </p>
-      </div>
-      <div class="ml-4">
-        <.link navigate={~p"/changelogs/#{changelog.id}"} class="text-blue-500 hover:text-blue-700">
+    <.link navigate={~p"/changelogs/#{changelog.id}"} class="block hover:bg-gray-50">
+      <div class="bg-white shadow-md rounded-lg p-4 flex items-center">
+        <div class="flex-grow">
+          <h2 class="text-xl font-semibold">
+            <%= changelog.title %>
+          </h2>
+          <p class="text-gray-600 text-sm">
+            Version: <%= changelog.system_version %> |
+              Released: <%= Calendar.strftime(changelog.release_date, "%B %d, %Y" ) %>
+          </p>
+          <p class="text-gray-800 mt-2">
+            <%= String.slice(changelog.description, 0, 100) %>...
+          </p>
+        </div>
+        <div class="ml-4 text-blue-500">
           View Details
-        </.link>
+        </div>
       </div>
-    </div>
+    </.link>
     <% end %>
 </div>

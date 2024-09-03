@@ -10,5 +10,9 @@ defmodule ChangenoteWeb.Layouts do
   """
   use ChangenoteWeb, :html
 
+  def app_version do
+    Application.spec(:changenote, :vsn) |> to_string()
+  end
+
   embed_templates "layouts/*"
 end

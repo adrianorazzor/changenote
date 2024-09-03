@@ -22,7 +22,9 @@ defmodule ChangenoteWeb.ChangelogLive.FormComponent do
         <.input field={@form[:improvements]} type="textarea" label="Improvements" />
         <.input field={@form[:known_issues]} type="textarea" label="Known Issues" />
         <:actions>
-          <.button phx-disable-with="Saving...">Save Changelog</.button>
+          <div class="flex justify-center w-full">
+            <.button phx-disable-with="Saving...">Save Changelog</.button>
+          </div>
         </:actions>
       </.simple_form>
     </div>

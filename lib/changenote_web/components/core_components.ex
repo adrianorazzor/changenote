@@ -422,7 +422,9 @@ defmodule ChangenoteWeb.CoreComponents do
   attr :class, :string, default: nil
 
   slot :inner_block, required: true
-  slot :subtitle
+  slot :subtitle do
+    attr :class, :string
+  end
   slot :actions
 
   def header(assigns) do
@@ -558,7 +560,7 @@ defmodule ChangenoteWeb.CoreComponents do
 
   def back(assigns) do
     ~H"""
-    <div class="mt-16">
+    <div class="mt-10">
       <.link
         navigate={@navigate}
         class="text-sm font-semibold leading-6 text-zinc-900 hover:text-zinc-700"
