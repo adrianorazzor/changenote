@@ -10,6 +10,7 @@ defmodule Changenote.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias Changenote.Changelogs.Changelog
+
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true, redact: true

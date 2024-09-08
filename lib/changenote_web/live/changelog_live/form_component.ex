@@ -7,12 +7,7 @@ defmodule ChangenoteWeb.ChangelogLive.FormComponent do
   def render(assigns) do
     ~H"""
     <div>
-      <.simple_form
-        for={@form}
-        id="changelog-form"
-        phx-target={@myself}
-        phx-submit="save"
-      >
+      <.simple_form for={@form} id="changelog-form" phx-target={@myself} phx-submit="save">
         <.input field={@form[:title]} type="text" label="Title" />
         <.input field={@form[:description]} type="textarea" label="Description" />
         <.input field={@form[:system_version]} type="text" label="System Version" />
@@ -47,9 +42,7 @@ defmodule ChangenoteWeb.ChangelogLive.FormComponent do
     case Changelogs.create_changelog(changelog_params, socket.assigns.current_user) do
       {:ok, _changelog} ->
         send(self(), {__MODULE__, :changelog_created})
-        {:noreply,
-         socket
-         |> put_flash(:info, "Changelog created successfully")}
+        {:noreply, socket}
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
     end

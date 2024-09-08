@@ -4,9 +4,36 @@ defmodule ChangenoteWeb.ChangelogLiveTest do
   import Phoenix.LiveViewTest
   import Changenote.ChangelogsFixtures
 
-  @create_attrs %{system_version: "some system_version", title: "some title", content: "some content", release_date: "2024-08-31", bug_fixes: "some bug_fixes", new_features: "some new_features", improvements: "some improvements", known_issues: "some known_issues"}
-  @update_attrs %{system_version: "some updated system_version", title: "some updated title", content: "some updated content", release_date: "2024-09-01", bug_fixes: "some updated bug_fixes", new_features: "some updated new_features", improvements: "some updated improvements", known_issues: "some updated known_issues"}
-  @invalid_attrs %{system_version: nil, title: nil, content: nil, release_date: nil, bug_fixes: nil, new_features: nil, improvements: nil, known_issues: nil}
+  @create_attrs %{
+    system_version: "some system_version",
+    title: "some title",
+    content: "some content",
+    release_date: "2024-08-31",
+    bug_fixes: "some bug_fixes",
+    new_features: "some new_features",
+    improvements: "some improvements",
+    known_issues: "some known_issues"
+  }
+  @update_attrs %{
+    system_version: "some updated system_version",
+    title: "some updated title",
+    content: "some updated content",
+    release_date: "2024-09-01",
+    bug_fixes: "some updated bug_fixes",
+    new_features: "some updated new_features",
+    improvements: "some updated improvements",
+    known_issues: "some updated known_issues"
+  }
+  @invalid_attrs %{
+    system_version: nil,
+    title: nil,
+    content: nil,
+    release_date: nil,
+    bug_fixes: nil,
+    new_features: nil,
+    improvements: nil,
+    known_issues: nil
+  }
 
   defp create_changelog(_) do
     changelog = changelog_fixture()

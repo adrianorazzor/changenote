@@ -1,53 +1,62 @@
 <div class="max-w-3xl mx-auto px-4 py-8">
-    <.header class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900">
-            <%= @changelog.title %>
-        </h1>
-        <:subtitle>
-            <p class="mt-2 text-lg text-gray-600">
-                <%= @changelog.description %>
-            </p>
-        </:subtitle>
-        <:actions>
-            <.link navigate={~p"/changelogs"}
-                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-600 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                &larr; Back to changelogs
-            </.link>
-        </:actions>
-    </.header>
-
-    <div class="bg-white shadow overflow-hidden sm:rounded-lg p-4">
-        <.list>
-            <:item title="System Version">
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= @changelog.system_version %>
-                </dd>
-            </:item>
-            <:item title="Release Date">
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= @changelog.release_date %>
-                </dd>
-            </:item>
-            <:item title="Bug Fixes">
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= @changelog.bug_fixes %>
-                </dd>
-            </:item>
-            <:item title="New Features">
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= @changelog.new_features %>
-                </dd>
-            </:item>
-            <:item title="Improvements">
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= @changelog.improvements %>
-                </dd>
-            </:item>
-            <:item title="Known Issues">
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= @changelog.known_issues %>
-                </dd>
-            </:item>
-        </.list>
-    </div>
+  <.header class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">
+      <%= @changelog.title %>
+    </h1>
+    
+    <:subtitle>
+      <p class="mt-2 text-lg text-gray-600">
+        <%= @changelog.description %>
+      </p>
+    </:subtitle>
+    
+    <:actions>
+      <.link
+        navigate={~p"/changelogs"}
+        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-600 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      >
+        &larr; Back to changelogs
+      </.link>
+    </:actions>
+  </.header>
+  
+  <div class="bg-white shadow overflow-hidden sm:rounded-lg p-4">
+    <.list>
+      <:item title="System Version">
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <%= @changelog.system_version %>
+        </dd>
+      </:item>
+      
+      <:item title="Release Date">
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <%= @changelog.release_date %>
+        </dd>
+      </:item>
+      
+      <:item title="Bug Fixes">
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <%= @changelog.bug_fixes %>
+        </dd>
+      </:item>
+      
+      <:item title="New Features">
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <%= @changelog.new_features %>
+        </dd>
+      </:item>
+      
+      <:item title="Improvements">
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <%= @changelog.improvements %>
+        </dd>
+      </:item>
+      
+      <:item title="Known Issues">
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <%= @changelog.known_issues %>
+        </dd>
+      </:item>
+    </.list>
+  </div>
 </div>

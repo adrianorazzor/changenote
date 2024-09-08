@@ -15,7 +15,7 @@
           </h2>
           <p class="text-gray-600 text-sm">
             Version: <%= changelog.system_version %> |
-              Released: <%= Calendar.strftime(changelog.release_date, "%B %d, %Y" ) %>
+            Released: <%= Calendar.strftime(changelog.release_date, "%B %d, %Y") %>
           </p>
           <p class="text-gray-800 mt-2">
             <%= String.slice(changelog.description, 0, 100) %>...
@@ -26,5 +26,5 @@
         </div>
       </div>
     </.link>
-    <% end %>
+  <% end %>
 </div>

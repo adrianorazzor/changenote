@@ -1,17 +1,18 @@
 <div class="max-w-2xl mx-auto py-8">
-    <.header class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-900">New Changelog</h1>
-        <:subtitle class="mt-2 text-lg text-gray-600">What's new in this release?</:subtitle>
-    </.header>
+  <.header class="text-center mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">New Changelog</h1>
 
-    <div class="mb-4 text-left">
-        <.back navigate={~p"/changelogs"}>
-            Back to changelogs
-        </.back>
-    </div>
+    <:subtitle class="mt-2 text-lg text-gray-600">What's new in this release?</:subtitle>
+  </.header>
 
-    <div class="bg-white shadow rounded-lg p-6">
-        <.live_component module={ChangenoteWeb.ChangelogLive.FormComponent} id="new-changelog" action={:new}
-            current_user={@current_user} return_to={~p"/changelogs"} />
-    </div>
+  <div class="mb-4 text-left">
+    <.back navigate={~p"/changelogs"}>
+      Back to changelogs
+    </.back>
+  </div>
+
+  <div class="bg-white shadow rounded-lg p-6">
+    <.live_component module={ChangenoteWeb.ChangelogLive.FormComponent} id="new-changelog" action={:new}
+      current_user={@current_user} />
+  </div>
 </div>

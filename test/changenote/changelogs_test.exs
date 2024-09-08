@@ -8,7 +8,16 @@ defmodule Changenote.ChangelogsTest do
 
     import Changenote.ChangelogsFixtures
 
-    @invalid_attrs %{system_version: nil, title: nil, content: nil, release_date: nil, bug_fixes: nil, new_features: nil, improvements: nil, known_issues: nil}
+    @invalid_attrs %{
+      system_version: nil,
+      title: nil,
+      content: nil,
+      release_date: nil,
+      bug_fixes: nil,
+      new_features: nil,
+      improvements: nil,
+      known_issues: nil
+    }
 
     test "list_changelogs/0 returns all changelogs" do
       changelog = changelog_fixture()
@@ -21,7 +30,16 @@ defmodule Changenote.ChangelogsTest do
     end
 
     test "create_changelog/1 with valid data creates a changelog" do
-      valid_attrs = %{system_version: "some system_version", title: "some title", content: "some content", release_date: ~D[2024-08-31], bug_fixes: "some bug_fixes", new_features: "some new_features", improvements: "some improvements", known_issues: "some known_issues"}
+      valid_attrs = %{
+        system_version: "some system_version",
+        title: "some title",
+        content: "some content",
+        release_date: ~D[2024-08-31],
+        bug_fixes: "some bug_fixes",
+        new_features: "some new_features",
+        improvements: "some improvements",
+        known_issues: "some known_issues"
+      }
 
       assert {:ok, %Changelog{} = changelog} = Changelogs.create_changelog(valid_attrs)
       assert changelog.system_version == "some system_version"
@@ -40,7 +58,17 @@ defmodule Changenote.ChangelogsTest do
 
     test "update_changelog/2 with valid data updates the changelog" do
       changelog = changelog_fixture()
-      update_attrs = %{system_version: "some updated system_version", title: "some updated title", content: "some updated content", release_date: ~D[2024-09-01], bug_fixes: "some updated bug_fixes", new_features: "some updated new_features", improvements: "some updated improvements", known_issues: "some updated known_issues"}
+
+      update_attrs = %{
+        system_version: "some updated system_version",
+        title: "some updated title",
+        content: "some updated content",
+        release_date: ~D[2024-09-01],
+        bug_fixes: "some updated bug_fixes",
+        new_features: "some updated new_features",
+        improvements: "some updated improvements",
+        known_issues: "some updated known_issues"
+      }
 
       assert {:ok, %Changelog{} = changelog} = Changelogs.update_changelog(changelog, update_attrs)
       assert changelog.system_version == "some updated system_version"

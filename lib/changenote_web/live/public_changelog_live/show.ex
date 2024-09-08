@@ -11,6 +11,7 @@ defmodule ChangenoteWeb.PublicChangelogLive.Show do
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
     changelog = Changelogs.get_changelog!(id)
+
     {:noreply,
      socket
      |> assign(:page_title, "Changelog: #{changelog.title}")
