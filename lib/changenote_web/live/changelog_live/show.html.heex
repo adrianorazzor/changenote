@@ -3,23 +3,30 @@
     <h1 class="text-3xl font-bold text-gray-900">
       <%= @changelog.title %>
     </h1>
-    
+
     <:subtitle>
       <p class="mt-2 text-lg text-gray-600">
         <%= @changelog.description %>
       </p>
     </:subtitle>
-    
-    <:actions>
-      <.link
-        navigate={~p"/changelogs"}
-        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-600 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      >
-        &larr; Back to changelogs
-      </.link>
-    </:actions>
   </.header>
-  
+
+  <div class="mb-8 flex justify-start space-x-4">
+    <.link navigate={~p"/changelogs"}
+      class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-600 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      &larr; Back to changelogs
+    </.link>
+    <.link navigate={~p"/changelogs/#{@changelog}/edit"}
+      class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      Edit changelog
+    </.link>
+    <.link phx-click="delete" phx-value-id={@changelog.id}
+      data-confirm="Are you sure you want to delete this changelog?"
+      class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+      Delete changelog
+    </.link>
+  </div>
+
   <div class="bg-white shadow overflow-hidden sm:rounded-lg p-4">
     <.list>
       <:item title="System Version">
@@ -27,31 +34,31 @@
           <%= @changelog.system_version %>
         </dd>
       </:item>
-      
+
       <:item title="Release Date">
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
           <%= @changelog.release_date %>
         </dd>
       </:item>
-      
+
       <:item title="Bug Fixes">
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
           <%= @changelog.bug_fixes %>
         </dd>
       </:item>
-      
+
       <:item title="New Features">
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
           <%= @changelog.new_features %>
         </dd>
       </:item>
-      
+
       <:item title="Improvements">
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
           <%= @changelog.improvements %>
         </dd>
       </:item>
-      
+
       <:item title="Known Issues">
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
           <%= @changelog.known_issues %>
@@ -60,3 +67,9 @@
     </.list>
   </div>
 </div>
+
+<.modal :if={@live_action==:edit} id="changelog-modal" show on_cancel={JS.patch(~p"/changelogs/#{@changelog}")}>
+  <.live_component module={ChangenoteWeb.ChangelogLive.FormComponent} id={@changelog.id} title={@page_title}
+    action={@live_action} changelog={@changelog} current_user={@current_user}
+    navigate={~p"/changelogs/#{@changelog}"} />
+</.modal>

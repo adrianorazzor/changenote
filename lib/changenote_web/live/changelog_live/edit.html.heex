@@ -1,0 +1,10 @@
+<.header>
+    Edit Changelog <%= @changelog.id %>
+        <:subtitle>Use this form to manage changelog records in your database.</:subtitle>
+</.header>
+
+<.live_component module={ChangenoteWeb.ChangelogLive.FormComponent} id={@changelog.id} title={@page_title}
+    action={@live_action} changelog={@changelog} current_user={@current_user}
+    navigate={~p"/changelogs/#{@changelog}"} />
+
+<.back navigate={~p"/changelogs"}>Back to changelogs</.back>

@@ -75,6 +75,7 @@ defmodule ChangenoteWeb.Router do
       live "/changelogs", ChangelogLive.Index
       live "/changelogs/new", ChangelogLive.New, :new
       live "/changelogs/:id", ChangelogLive.Show, :show
+      live "/changelogs/:id/edit", ChangelogLive.Edit, :edit
     end
   end
 

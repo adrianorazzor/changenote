@@ -2,7 +2,6 @@ defmodule ChangenoteWeb.ChangelogLive.FormComponent do
   use ChangenoteWeb, :live_component
   alias Changenote.Changelogs
   alias Changenote.Changelogs.Changelog
-
   @impl true
   def render(assigns) do
     ~H"""
@@ -27,31 +26,56 @@ defmodule ChangenoteWeb.ChangelogLive.FormComponent do
   end
 
   @impl true
-  def update(%{action: :new, current_user: current_user} = assigns, socket) do
-    changeset = Changelogs.change_changelog(%Changelog{})
+  def update(assigns, socket) do
+    changelog = get_changelog(assigns)
+    changeset = Changelogs.change_changelog(changelog)
+
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:current_user, current_user)
+     |> assign(:changelog, changelog)
+     |> assign(:changeset, changeset)
      |> assign(:form, to_form(changeset))}
   end
 
   @impl true
+  def handle_event("validate", %{"changelog" => changelog_params}, socket) do
+    changeset =
+      socket.assigns.changelog
+      |> Changelogs.change_changelog(changelog_params)
+      |> Map.put(:action, :validate)
+
+    {:noreply, assign(socket, :form, to_form(changeset))}
+  end
+
   def handle_event("save", %{"changelog" => changelog_params}, socket) do
-    changelog_params = Map.update(changelog_params, "release_date", nil, &parse_date/1)
-    case Changelogs.create_changelog(changelog_params, socket.assigns.current_user) do
-      {:ok, _changelog} ->
-        send(self(), {__MODULE__, :changelog_created})
+    save_changelog(socket, socket.assigns.action, changelog_params)
+  end
+
+  defp save_changelog(socket, :edit, changelog_params) do
+    case Changelogs.update_changelog(socket.assigns.changelog, changelog_params) do
+      {:ok, changelog} ->
+        notify_parent({:changelog_updated, changelog})
         {:noreply, socket}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply, assign(socket, :form, to_form(changeset))}
+    end
+  end
+
+  defp save_changelog(socket, :new, changelog_params) do
+    case Changelogs.create_changelog(changelog_params, socket.assigns.current_user) do
+      {:ok, changelog} ->
+        notify_parent({:changelog_created, changelog})
+        {:noreply, socket}
+
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
     end
   end
 
-  defp parse_date(date_str) do
-    case Date.from_iso8601(date_str) do
-      {:ok, date} -> date
-      {:error, _} -> nil
-    end
-  end
+  defp get_changelog(%{changelog: changelog}), do: changelog
+  defp get_changelog(%{action: :new}), do: %Changelog{}
+  defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
+
 end
