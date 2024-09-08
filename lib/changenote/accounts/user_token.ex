@@ -1,4 +1,13 @@
 defmodule Changenote.Accounts.UserToken do
+  @moduledoc """
+  Manages user tokens for authentication and authorization purposes.
+
+  This module handles the creation, validation, and querying of user tokens
+  for various contexts such as session management, password resets, and
+  email confirmations. It provides functions to generate, store, and
+  verify tokens, ensuring secure user authentication and authorization
+  throughout the Changenote application.
+  """
   use Ecto.Schema
   import Ecto.Query
   alias Changenote.Accounts.UserToken

@@ -1,4 +1,12 @@
 defmodule Changenote.Accounts.UserNotifier do
+  @moduledoc """
+  Manages user notifications for the Changenote application.
+
+  This module provides functions to deliver various types of notifications
+  to users, such as confirmation instructions, reset password instructions,
+  and update email instructions. It uses the Swoosh library to construct
+  and send emails, with the actual delivery handled by the application's mailer.
+  """
   import Swoosh.Email
 
   alias Changenote.Mailer

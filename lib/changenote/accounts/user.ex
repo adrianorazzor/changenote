@@ -1,4 +1,12 @@
 defmodule Changenote.Accounts.User do
+  @moduledoc """
+  Manages user accounts and related data.
+
+  This module defines the schema for user accounts, including fields for email,
+  password, hashed password, confirmation status, and associated changelogs.
+  It also provides methods for user registration, password validation, and
+  other related operations.
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias Changenote.Changelogs.Changelog

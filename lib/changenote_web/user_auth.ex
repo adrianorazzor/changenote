@@ -1,4 +1,8 @@
+
 defmodule ChangenoteWeb.UserAuth do
+@moduledoc """
+Handles user authentication and authorization for the Changenote web application.
+"""
   use ChangenoteWeb, :verified_routes
 
   import Plug.Conn

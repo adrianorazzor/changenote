@@ -1,4 +1,12 @@
-  defmodule Changenote.Changelogs.Changelog do
+defmodule Changenote.Changelogs.Changelog do
+  @moduledoc """
+  Manages changelog entries for the Changenote application.
+
+  This module defines the schema for changelog entries, including fields for
+  system version, title, description, release date, bug fixes, new features,
+  improvements, known issues, and the associated user. It also provides methods
+  for creating and validating changelog entries.
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias Changenote.Accounts.User
